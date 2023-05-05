@@ -111,6 +111,18 @@ console.log(messageArray)
         handleItemClick(messageArray[0]?.id, newITemArray,send)
         setUserMessage('');
     }, [ItemsList, userMessage])
+
+    const debouncingFunction = (func)=>{
+        let timer =null;
+        return function (...args){
+            timer = setTimeout(()=>{
+                if(timer) {clearTimeout()}
+                let context = this
+                func.apply(context,args);
+            },1000)
+        }
+    }
+
     return {
         openMessage,
         setOpenMessage,
